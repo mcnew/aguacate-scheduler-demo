@@ -1,0 +1,15 @@
+{
+        "specs": {
+                "kind": "job",
+                "format": "1.0"
+        }, 
+        "definition": "alpha",
+        "schedules": [
+                {
+                        "type": "cron",
+                        "expression": "0/1 * * * ?"
+                }
+        ],
+        "context": {
+        }
+}
