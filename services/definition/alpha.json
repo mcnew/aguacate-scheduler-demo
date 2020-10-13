@@ -1,0 +1,94 @@
+{
+        "specs": {
+                "kind": "definition",
+                "format": "1.0"
+        },
+        "name": "alpha",
+        "datasource": "alphashop",
+        "fields": {
+        },
+        "vals": [
+        ],
+        "validators": [
+                {
+                        "name": "CHECK_NO_DATA",
+                        "type": "SQL_COUNT_ZERO",
+                        "message": "Check no registry for yesterday",
+                        "sql": "SELECT COUNT(*) FROM cashout WHERE day = date_sub(current_date, interval 1 day)",
+                        "parameters": [
+                        ]
+                }
+        ],
+        "processors": [
+                {
+                        "name": "SELECT_ALL_SALES",
+                        "type": "SQL_SELECT_MULTIPLE_ROW",
+                        "message": "Select all sales",
+                        "outputName": "sales",
+                        "sql": "SELECT amount, tax FROM sale WHERE stamp BETWEEN date_sub(current_date, interval 9 day) AND CURRENT_DATE",
+                        "required": [
+                        ],
+                        "optional": [
+                                "amount",
+                                "tax"
+                        ]
+                },
+                {
+                        "name": "INITIALIZE_SUM",
+                        "type": "LITERAL_FLOAT",
+                        "message": "Sum of amount to zero",
+                        "outputName": "sum",
+                        "value": "0.00"
+                },
+                {
+                        "name": "INITIALIZE_TAXES",
+                        "type": "LITERAL_FLOAT",
+                        "message": "Sum of amount to zero taxes",
+                        "outputName": "sumTaxes",
+                        "value": "0.00"
+                },
+                {
+                        "name": "ITERATOR_OVER_SALES",
+                        "type": "STRUCTURE_ARRAY_ITERATOR",
+                        "message": "Elements",
+                        "outputName": "sale",
+                        "required": [
+                                "sales"
+                        ],
+                        "optional": [
+                        ],
+                        "sentences": [
+                                {
+                                        "name": "ADD_AMOUNT",
+                                        "type": "SUM",
+                                        "message": "Add amount",
+                                        "outputName": "sum",
+                                        "required": [
+                                                "sum",
+                                                {
+                                                        "context": "sale",
+                                                        "name": "amount"
+                                                }
+                                        ],
+                                        "optional": [
+                                        ]
+                                },
+                                {
+                                        "name": "ADD_TAXES",
+                                        "type": "SUM",
+                                        "message": "Add taxes",
+                                        "outputName": "sumTaxes",
+                                        "required": [
+                                                "sum",
+                                                {
+                                                        "context": "sale",
+                                                        "name": "tax"
+                                                }
+                                        ],
+                                        "optional": [
+                                        ]
+                                }
+                        ]
+                }
+        ]
+}
