@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="US-ASCII" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+        <modelVersion>4.0.0</modelVersion>
+        <groupId>aguacate-scheduler-demo</groupId>
+        <artifactId>aguacate-scheduler-demo</artifactId>
+        <version>0.0.1</version>
+        <name>aguacate-scheduler-demo</name>
+
+        <properties>
+                <project.build.sourceEncoding>US-ASCII</project.build.sourceEncoding>
+                <maven.compiler.source>1.8</maven.compiler.source>
+                <maven.compiler.target>1.8</maven.compiler.target>
+                <enableAssertions>true</enableAssertions>
+        </properties>
+
+        <dependencies>
+
+                <dependency>
+                        <groupId>net.sf.aguacate.scheduler</groupId>
+                        <artifactId>aguacate-scheduler</artifactId>
+                </dependency>
+                <dependency>
+                        <groupId>net.sf.aguacate.effort.async</groupId>
+                        <artifactId>aguacate-effort-async-simple</artifactId>
+                </dependency>
+                <dependency>
+                        <groupId>net.sf.aguacate.effort.scheduler</groupId>
+                        <artifactId>aguacate-effort-scheduler-quartz</artifactId>
+                </dependency>
+
+                <dependency>
+                        <groupId>org.mariadb.jdbc</groupId>
+                        <artifactId>mariadb-java-client</artifactId>
+                        <version>2.6.0</version>
+                        <scope>runtime</scope>
+                </dependency>
+
+        </dependencies>
+
+        <dependencyManagement>
+
+                <dependencies>
+
+                        <dependency>
+                                <groupId>net.sf.aguacate.scheduler</groupId>
+                                <artifactId>aguacate-scheduler-bom</artifactId>
+                                <version>0.0.2</version>
+                                <type>pom</type>
+                                <scope>import</scope>
+                        </dependency>
+
+                </dependencies>
+
+        </dependencyManagement>
+
+</project>
