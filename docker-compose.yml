@@ -1,0 +1,25 @@
+version: "3.2"
+services:
+  db:
+    build: db
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+      - MYSQL_DATABASE=alphashop
+      - MYSQL_USER=alphashop
+      - MYSQL_PASSWORD=alphashop
+    networks:
+      - aguacate-demo
+  aguacate-scheduler:
+    build: services
+    depends_on:
+      - db
+    networks:
+      - aguacate-demo
+    volumes:
+      - "./services/job:/var/lib/aguacate/job"
+      - "./services/definition:/var/lib/aguacate/definition"
+      - "./services/script:/var/lib/aguacate/script"
+      - "./services/database:/var/lib/aguacate/database"
+      - "./services/connector:/var/lib/aguacate/connector"
+networks:
+  aguacate-demo:
