@@ -43,9 +43,23 @@
                 {
                         "name": "INITIALIZE_TAXES",
                         "type": "LITERAL_FLOAT",
-                        "message": "Sum of amount to zero taxes",
+                        "message": "Sum of taxes to zero",
                         "outputName": "sumTaxes",
                         "value": "0.00"
+                },
+                {
+                        "name": "INITIALIZE_COUNTER",
+                        "type": "LITERAL_INTEGER",
+                        "message": "counter to zero",
+                        "outputName": "counter",
+                        "value": "0"
+                },
+                {
+                        "name": "INITIALIZE_ONE_CONSTANT",
+                        "type": "LITERAL_INTEGER",
+                        "message": "constant one",
+                        "outputName": "constant_one",
+                        "value": "1"
                 },
                 {
                         "name": "ITERATOR_OVER_SALES",
@@ -84,6 +98,18 @@
                                                         "context": "sale",
                                                         "name": "tax"
                                                 }
+                                        ],
+                                        "optional": [
+                                        ]
+                                },
+                                {
+                                        "name": "COUNT",
+                                        "type": "SUM",
+                                        "message": "counter",
+                                        "outputName": "counter",
+                                        "required": [
+                                                "counter",
+                                                "constant_one"
                                         ],
                                         "optional": [
                                         ]
