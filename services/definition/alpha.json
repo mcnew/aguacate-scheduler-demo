@@ -51,7 +51,7 @@
                         "name": "INITIALIZE_COUNTER",
                         "type": "LITERAL_INTEGER",
                         "message": "counter to zero",
-                        "outputName": "counter",
+                        "outputName": "count",
                         "value": "0"
                 },
                 {
@@ -93,7 +93,7 @@
                                         "message": "Add taxes",
                                         "outputName": "sumTaxes",
                                         "required": [
-                                                "sum",
+                                                "sumTaxes",
                                                 {
                                                         "context": "sale",
                                                         "name": "tax"
@@ -105,15 +105,39 @@
                                 {
                                         "name": "COUNT",
                                         "type": "SUM",
-                                        "message": "counter",
-                                        "outputName": "counter",
+                                        "message": "count",
+                                        "outputName": "count",
                                         "required": [
-                                                "counter",
+                                                "count",
                                                 "constant_one"
                                         ],
                                         "optional": [
                                         ]
                                 }
+                        ]
+                },
+                {
+                        "name": "CALCULATE_TOTAL",
+                        "type": "SUM",
+                        "message": "Calculate sum",
+                        "outputName": "total",
+                        "required": [
+                                "sum",
+                                "sumTaxes"
+                        ],
+                        "optional": [
+                        ]
+                },
+                {
+                        "name": "CALCULATE_AVERAGE",
+                        "type": "DIVIDE",
+                        "message": "Calculate average",
+                        "outputName": "average",
+                        "required": [
+                                "total",
+                                "count"
+                        ],
+                        "optional": [
                         ]
                 }
         ]
