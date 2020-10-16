@@ -25,119 +25,14 @@
                         "type": "SQL_SELECT_MULTIPLE_ROW",
                         "message": "Select all sales",
                         "outputName": "sales",
-                        "sql": "SELECT amount, tax FROM sale WHERE stamp BETWEEN DATE_SUB(CURRENT_DATE, interval 1 day) AND CURRENT_DATE",
+                        "sql": "SELECT SUM(amount) AS sum, SUM(tax) AS sumTaxes, COUNT(*) AS count, SUM(amount)+SUM(tax) AS total, (SUM(amount)+SUM(tax))/COUNT(*) AS average FROM sale WHERE stamp BETWEEN DATE_SUB(CURRENT_DATE, interval 1 day) AND CURRENT_DATE",
                         "required": [
                         ],
                         "optional": [
-                                "amount",
-                                "tax"
-                        ]
-                },
-                {
-                        "name": "INITIALIZE_SUM",
-                        "type": "LITERAL_FLOAT",
-                        "message": "Sum of amount to zero",
-                        "outputName": "sum",
-                        "value": "0.00"
-                },
-                {
-                        "name": "INITIALIZE_TAXES",
-                        "type": "LITERAL_FLOAT",
-                        "message": "Sum of taxes to zero",
-                        "outputName": "sumTaxes",
-                        "value": "0.00"
-                },
-                {
-                        "name": "INITIALIZE_COUNTER",
-                        "type": "LITERAL_INTEGER",
-                        "message": "counter to zero",
-                        "outputName": "count",
-                        "value": "0"
-                },
-                {
-                        "name": "INITIALIZE_ONE_CONSTANT",
-                        "type": "LITERAL_INTEGER",
-                        "message": "constant one",
-                        "outputName": "constant_one",
-                        "value": "1"
-                },
-                {
-                        "name": "ITERATOR_OVER_SALES",
-                        "type": "STRUCTURE_ARRAY_ITERATOR",
-                        "message": "Elements",
-                        "outputName": "sale",
-                        "required": [
-                                "sales"
-                        ],
-                        "optional": [
-                        ],
-                        "sentences": [
-                                {
-                                        "name": "ADD_AMOUNT",
-                                        "type": "SUM",
-                                        "message": "Add amount",
-                                        "outputName": "sum",
-                                        "required": [
-                                                "sum",
-                                                {
-                                                        "context": "sale",
-                                                        "name": "amount"
-                                                }
-                                        ],
-                                        "optional": [
-                                        ]
-                                },
-                                {
-                                        "name": "ADD_TAXES",
-                                        "type": "SUM",
-                                        "message": "Add taxes",
-                                        "outputName": "sumTaxes",
-                                        "required": [
-                                                "sumTaxes",
-                                                {
-                                                        "context": "sale",
-                                                        "name": "tax"
-                                                }
-                                        ],
-                                        "optional": [
-                                        ]
-                                },
-                                {
-                                        "name": "COUNT",
-                                        "type": "SUM",
-                                        "message": "count",
-                                        "outputName": "count",
-                                        "required": [
-                                                "count",
-                                                "constant_one"
-                                        ],
-                                        "optional": [
-                                        ]
-                                }
-                        ]
-                },
-                {
-                        "name": "CALCULATE_TOTAL",
-                        "type": "SUM",
-                        "message": "Calculate sum",
-                        "outputName": "total",
-                        "required": [
                                 "sum",
-                                "sumTaxes"
-                        ],
-                        "optional": [
-                        ]
-                },
-                {
-                        "name": "CALCULATE_AVERAGE",
-                        "type": "DIVIDE",
-                        "message": "Calculate average",
-                        "outputName": "average",
-                        "required": [
-                                "total",
-                                "count"
-                        ],
-                        "optional": [
+                                "sumTaxes",
+                                "count",
+                                "total"
                         ]
                 }
         ]
