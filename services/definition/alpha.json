@@ -25,7 +25,7 @@
                         "type": "SQL_SELECT_MULTIPLE_ROW",
                         "message": "Select all sales",
                         "outputName": "sales",
-                        "sql": "SELECT amount, tax FROM sale WHERE stamp BETWEEN date_sub(current_date, interval 9 day) AND CURRENT_DATE",
+                        "sql": "SELECT amount, tax FROM sale WHERE stamp BETWEEN DATE_SUB(CURRENT_DATE, interval 1 day) AND CURRENT_DATE",
                         "required": [
                         ],
                         "optional": [
