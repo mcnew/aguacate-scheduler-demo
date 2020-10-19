@@ -25,7 +25,7 @@
                         "type": "SQL_SELECT_MULTIPLE_ROW",
                         "message": "Select all sales",
                         "outputName": "sales",
-                        "sql": "SELECT SUM(amount) AS sum, SUM(tax) AS sumTaxes, COUNT(*) AS count, SUM(amount)+SUM(tax) AS total, (SUM(amount)+SUM(tax))/COUNT(*) AS average FROM sale WHERE stamp BETWEEN DATE_SUB(CURRENT_DATE, interval 1 day) AND CURRENT_DATE",
+                        "sql": "SELECT SUM(amount) AS sum, SUM(tax) AS sumTaxes, COUNT(*) AS count, SUM(amount)+SUM(tax) AS total FROM sale WHERE stamp BETWEEN DATE_SUB(CURRENT_DATE, interval 1 day) AND CURRENT_DATE",
                         "required": [
                         ],
                         "optional": [
